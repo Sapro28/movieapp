@@ -1,3 +1,5 @@
+import '../styles/Favorites.css';
+
 function Favorites() {
   return (
     <div className="favorites-empty">
