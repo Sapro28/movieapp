@@ -8,8 +8,44 @@
   margin-bottom: 2rem;
   text-align: center;
   font-size: 2.5rem;
-  color: aqua;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  font-weight: 800;
+  letter-spacing: 0.6px;
+
+  background: linear-gradient(
+    90deg,
+    #ff2a2a 0%,
+    #ff2a2a 18%,
+    rgba(255, 255, 255, 0.95) 24%,
+    #ff2a2a 30%,
+    #ff2a2a 48%,
+    rgba(255, 255, 255, 0.55) 52%,
+    #ff2a2a 58%,
+    #ff2a2a 100%
+  );
+
+  background-size: 260% 100%;
+  background-position: 0% 50%;
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+
+  animation: favoritesLightning 3.6s ease-in-out infinite;
+
+  text-shadow: 0 0 22px rgba(229, 9, 20, 0.35), 0 0 44px rgba(229, 9, 20, 0.2);
+}
+
+@keyframes favoritesLightning {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .favorites-empty {
