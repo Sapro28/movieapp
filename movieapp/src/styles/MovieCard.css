@@ -115,10 +115,46 @@
   .movie-info {
     padding: 0.75rem;
   }
+}
 
-  .favorite-btn {
-    width: 32px;
-    height: 32px;
-    font-size: 1.2rem;
-  }
+.favorite-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+
+  display: grid;
+  place-items: center;
+
+  background: rgba(0, 0, 0, 0.55);
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+
+  transition: transform 0.15s ease, background-color 0.15s ease;
+  z-index: 5;
+}
+
+.favorite-btn:hover {
+  transform: scale(1.08);
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.favorite-btn .heart {
+  font-size: 1.6rem;
+  line-height: 1;
+  color: white;
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.favorite-btn.active .heart {
+  color: #e50914;
+  transform: scale(1.1);
+}
+
+.favorite-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.55);
 }
