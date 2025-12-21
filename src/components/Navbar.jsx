@@ -4,7 +4,9 @@ function Navbar() {
   return (
     <nav className="navbar">
       <div className="navbar-brand">
-        <Link to="/">Watch Your Favorite Movies</Link>
+        <Link to="/" className="hero">
+          Watch Your Favorite Movies
+        </Link>
       </div>
 
       <div className="navbar-links">
