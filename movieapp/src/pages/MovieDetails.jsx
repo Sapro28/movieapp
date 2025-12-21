@@ -1,22 +1,25 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getMovieDetails, getMovieCredits } from '../services/api';
-import './styles/MovieDetails';
+import '../styles/MovieDetails.css';
 
 function MovieDetails() {
+  const { id } = useParams();
+
   const [movie, setMovie] = useState(null);
   const [credits, setCredits] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { id } = useParams();
 
   useEffect(() => {
     const loadMovieDetails = async () => {
       setLoading(true);
+      setError(null);
 
       try {
-        const data = await getMovieDetails(id);
-        setMovie(data);
+        const movieData = await getMovieDetails(id);
+        setMovie(movieData);
+
         const creditsData = await getMovieCredits(id);
         setCredits(creditsData);
       } catch (err) {
@@ -30,6 +33,10 @@ function MovieDetails() {
     loadMovieDetails();
   }, [id]);
 
+  const posterUrl = movie?.poster_path
+    ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+    : null;
+
   const genreText = movie?.genres?.map((g) => g.name).join(', ');
   const countryText = movie?.production_countries
     ?.map((c) => c.name)
@@ -37,57 +44,72 @@ function MovieDetails() {
   const productionText = movie?.production_companies
     ?.map((p) => p.name)
     .join(', ');
-
   const castText = credits?.cast
     ?.slice(0, 5)
     .map((p) => (p.character ? `${p.name} as ${p.character}` : p.name))
     .join(', ');
 
-  const posterUrl = movie?.poster_path
-    ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-    : null;
-
   return (
-    <div style={{ padding: 20 }}>
-      {loading && <p>Loading...</p>}
-      {error && <p style={{ color: 'crimson' }}>{error}</p>}
-      {movie && <h2>{movie.title}</h2>}
-      {movie?.overview && <p>{movie.overview}</p>}
-      {movie?.release_date && (
-        <p>
-          <strong>Released:</strong> {movie.release_date}
-        </p>
-      )}
-      {credits?.cast?.[0] && <p>Top cast: {credits.cast[0].name}</p>}
+    <div className="movie-details-page">
+      {loading && <div className="movie-details-status">Loading...</div>}
+      {error && <div className="movie-details-error">{error}</div>}
 
-      {genreText && (
-        <p>
-          <strong>Genre:</strong> {genreText}
-        </p>
-      )}
+      {movie && !loading && !error && (
+        <div className="movie-details-layout">
+          <div className="movie-details-left">
+            <h2 className="movie-details-title">{movie.title}</h2>
 
-      {movie?.runtime && (
-        <p>
-          <strong>Duration:</strong> {movie.runtime} min
-        </p>
-      )}
+            {posterUrl ? (
+              <img src={posterUrl} alt={movie.title} className="movie-poster" />
+            ) : (
+              <div className="movie-poster-fallback">No poster</div>
+            )}
+          </div>
 
-      {countryText && (
-        <p>
-          <strong>Country:</strong> {countryText}
-        </p>
-      )}
+          <div className="movie-details-right">
+            {movie.overview && (
+              <p className="movie-overview">{movie.overview}</p>
+            )}
 
-      {productionText && (
-        <p>
-          <strong>Production:</strong> {productionText}
-        </p>
-      )}
+            <div className="movie-meta-list">
+              {movie.release_date && (
+                <p className="movie-meta">
+                  <strong>Released:</strong> {movie.release_date}
+                </p>
+              )}
 
-      {castText && (
-        <p>
-          <strong>Casts:</strong> {castText}
-        </p>
+              {genreText && (
+                <p className="movie-meta">
+                  <strong>Genre:</strong> {genreText}
+                </p>
+              )}
+
+              {movie.runtime && (
+                <p className="movie-meta">
+                  <strong>Duration:</strong> {movie.runtime} min
+                </p>
+              )}
+
+              {countryText && (
+                <p className="movie-meta">
+                  <strong>Country:</strong> {countryText}
+                </p>
+              )}
+
+              {productionText && (
+                <p className="movie-meta">
+                  <strong>Production:</strong> {productionText}
+                </p>
+              )}
+
+              {castText && (
+                <p className="movie-meta">
+                  <strong>Casts:</strong> {castText}
+                </p>
+              )}
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

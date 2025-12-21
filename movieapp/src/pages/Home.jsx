@@ -27,12 +27,20 @@ function Home() {
 
   const handleSearch = async (e) => {
     e.preventDefault();
-    if (!searchQuery.trim()) return;
     if (loading) return;
+
+    const query = searchQuery.trim();
     setLoading(true);
 
     try {
-      const searchResults = await searchMovies(searchQuery);
+      if (!query) {
+        const defaultMovies = await getPopularMovies();
+        setMovies(defaultMovies);
+        setError(null);
+        return;
+      }
+
+      const searchResults = await searchMovies(query);
       setMovies(searchResults);
       setError(null);
     } catch (err) {
