@@ -69,7 +69,6 @@
   line-height: 1.6;
 }
 
-/* Animation for new favorites being added */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -87,7 +86,37 @@
 
 .favorites .movies-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr));
   gap: 2rem;
   justify-items: center;
+}
+
+@media (max-width: 640px) {
+  .favorites {
+    padding: 1rem;
+  }
+
+  .favorites .movies-grid {
+    gap: 1.25rem;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  .favorites h2 {
+    background: none;
+    -webkit-background-clip: initial;
+    background-clip: initial;
+    color: #e50914;
+    -webkit-text-fill-color: #e50914;
+    animation: none;
+    text-shadow: none;
+  }
+
+  .favorites-empty {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+
+  .favorites-empty p {
+    color: #444;
+  }
 }
