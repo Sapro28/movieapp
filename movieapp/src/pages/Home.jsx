@@ -57,9 +57,7 @@ function Home() {
           Search
         </button>
       </form>
-
       {error && <div className="error-message">{error}</div>}
-
       {loading ? (
         <div className="loading">Loading...</div>
       ) : (
