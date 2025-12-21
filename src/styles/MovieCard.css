@@ -64,6 +64,7 @@
   align-items: center;
   justify-content: center;
   -webkit-tap-highlight-color: transparent;
+  z-index: 5;
 }
 
 .favorite-btn:focus,
@@ -135,5 +136,9 @@
 
   .favorite-btn .heart {
     font-size: 1.6rem;
+  }
+
+  .movie-overlay {
+    opacity: 1;
   }
 }
