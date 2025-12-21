@@ -28,7 +28,7 @@
 
 .movie-details-layout {
   display: grid;
-  grid-template-columns: 420px minmax(0, 1fr); /* bigger poster column */
+  grid-template-columns: 420px minmax(0, 1fr);
   gap: 44px;
   align-items: start;
 
@@ -54,7 +54,7 @@
   text-shadow: 0 14px 40px rgba(0, 0, 0, 0.6);
 }
 
-.movie-poster {
+.movie-details-page .movie-poster {
   width: 100%;
   border-radius: 22px;
   display: block;
@@ -67,14 +67,14 @@
     border-color 200ms ease;
 }
 
-.movie-poster:hover {
+.movie-details-page .movie-poster:hover {
   transform: translateY(-3px);
   border-color: rgba(255, 255, 255, 0.18);
   box-shadow: 0 34px 85px rgba(0, 0, 0, 0.78),
     0 2px 0 rgba(255, 255, 255, 0.07) inset;
 }
 
-.movie-poster-fallback {
+.movie-details-page .movie-poster-fallback {
   width: 100%;
   aspect-ratio: 2 / 3;
   border-radius: 22px;
@@ -141,8 +141,71 @@
   margin-right: 0;
   opacity: 0.95;
 }
+
 .movie-accent {
   color: #ff2a2a;
+}
+
+@media (prefers-color-scheme: light) {
+  .movie-details-page {
+    color: #111;
+  }
+
+  .movie-details-title {
+    color: #111;
+    text-shadow: none;
+  }
+
+  .movie-overview {
+    color: #333;
+  }
+
+  .movie-meta {
+    color: #333;
+  }
+
+  .movie-meta strong {
+    color: #111;
+  }
+
+  .movie-details-status,
+  .movie-details-error {
+    border-color: rgba(0, 0, 0, 0.12);
+    background: rgba(0, 0, 0, 0.04);
+  }
+
+  .movie-details-error {
+    background: rgba(255, 0, 0, 0.08);
+    border-color: rgba(255, 0, 0, 0.18);
+    color: #7a1d1d;
+  }
+
+  .movie-meta-list {
+    border-top-color: rgba(0, 0, 0, 0.12);
+  }
+
+  .movie-meta::after {
+    background: rgba(0, 0, 0, 0.08);
+  }
+
+  .movie-details-page .movie-poster {
+    border-color: rgba(0, 0, 0, 0.12);
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.18),
+      0 2px 0 rgba(255, 255, 255, 0.55) inset;
+  }
+
+  .movie-details-page .movie-poster:hover {
+    border-color: rgba(0, 0, 0, 0.18);
+    box-shadow: 0 22px 56px rgba(0, 0, 0, 0.22),
+      0 2px 0 rgba(255, 255, 255, 0.6) inset;
+  }
+
+  .movie-details-page .movie-poster-fallback {
+    background: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.12);
+    color: rgba(0, 0, 0, 0.65);
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.16);
+  }
 }
 
 @media (max-width: 1100px) {
@@ -194,8 +257,8 @@
     font-size: 24px;
   }
 
-  .movie-poster,
-  .movie-poster-fallback {
+  .movie-details-page .movie-poster,
+  .movie-details-page .movie-poster-fallback {
     border-radius: 18px;
   }
 

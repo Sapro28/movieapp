@@ -102,18 +102,20 @@
 }
 
 @media (prefers-color-scheme: light) {
-  .favorites h2 {
-    background: none;
-    -webkit-background-clip: initial;
-    background-clip: initial;
-    color: #e50914;
-    -webkit-text-fill-color: #e50914;
-    animation: none;
-    text-shadow: none;
+  .favorites {
+    color: #111;
   }
 
-  .favorites-empty {
-    background-color: rgba(0, 0, 0, 0.04);
+  .favorites .movie-info h3 {
+    color: #111;
+  }
+
+  .favorites .movie-info p {
+    color: #444;
+  }
+
+  .favorites-empty h2 {
+    color: #e50914;
   }
 
   .favorites-empty p {
