@@ -34,7 +34,7 @@ function MovieDetails() {
   }, [id]);
 
   const posterUrl = movie?.poster_path
-    ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+    ? `https://image.tmdb.org/t/p/w342${movie.poster_path}`
     : null;
 
   const genreText = movie?.genres?.map((g) => g.name).join(', ');
